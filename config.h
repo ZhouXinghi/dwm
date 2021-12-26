@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -12,8 +13,8 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-// static const char col_cyan[]        = "#005577";
-static const char col_cyan[]        = "#a244ed";
+static const char col_cyan[]        = "#005577";
+// static const char col_cyan[]        = "#a244ed";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
@@ -41,7 +42,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.618; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -70,9 +71,19 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *volumeUpCmd[] = { "amixer", "-c", "1", "sset", "Master", "2+", "unmute", NULL };
+static const char *volumeDownCmd[] = { "amixer", "-c", "1", "sset", "Master", "2-", "unmute", NULL };
+static const char *volumeMuteCmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *backLightUpCmd[] = { "xbacklight", "-inc", "10", NULL };
+static const char *backLightDownCmd[] = { "xbacklight", "-dec", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0,             XF86XK_AudioRaiseVolume, spawn,          {.v = volumeUpCmd } },
+	{ 0,             XF86XK_AudioLowerVolume, spawn,          {.v = volumeDownCmd } },
+	{ 0,             XF86XK_AudioMute, spawn,          {.v = volumeMuteCmd } },
+    { 0,                            XF86XK_MonBrightnessUp, spawn, { .v = backLightUpCmd } },
+    { 0,                            XF86XK_MonBrightnessDown, spawn, { .v = backLightDownCmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
