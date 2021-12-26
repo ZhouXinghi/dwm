@@ -15,7 +15,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 // static const char col_cyan[]        = "#a244ed";
-static const unsigned int baralpha = 0.3;
+static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -76,6 +76,7 @@ static const char *volumeDownCmd[] = { "amixer", "-c", "1", "sset", "Master", "2
 static const char *volumeMuteCmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 static const char *backLightUpCmd[] = { "xbacklight", "-inc", "10", NULL };
 static const char *backLightDownCmd[] = { "xbacklight", "-dec", "10", NULL };
+static const char *chrome[] = { "google-chrome-stable", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -84,6 +85,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioMute, spawn,          {.v = volumeMuteCmd } },
     { 0,                            XF86XK_MonBrightnessUp, spawn, { .v = backLightUpCmd } },
     { 0,                            XF86XK_MonBrightnessDown, spawn, { .v = backLightDownCmd } },
+	{ MODKEY,                       XK_g,      spawn,          {.v = chrome } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
@@ -96,7 +98,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -117,7 +119,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask|ControlMask,             XK_q,      quit,           {0} },
 };
 
 /* button definitions */
