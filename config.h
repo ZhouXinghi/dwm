@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 15;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -15,7 +15,7 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 // static const char col_cyan[]        = "#a244ed";
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0.3;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -79,9 +79,9 @@ static const char *backLightDownCmd[] = { "xbacklight", "-dec", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,             XF86XK_AudioRaiseVolume, spawn,          {.v = volumeUpCmd } },
-	{ 0,             XF86XK_AudioLowerVolume, spawn,          {.v = volumeDownCmd } },
-	{ 0,             XF86XK_AudioMute, spawn,          {.v = volumeMuteCmd } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn,          {.v = volumeUpCmd } },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn,          {.v = volumeDownCmd } },
+	{ 0,                            XF86XK_AudioMute, spawn,          {.v = volumeMuteCmd } },
     { 0,                            XF86XK_MonBrightnessUp, spawn, { .v = backLightUpCmd } },
     { 0,                            XF86XK_MonBrightnessDown, spawn, { .v = backLightDownCmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
